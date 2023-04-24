@@ -23,14 +23,6 @@ try {
         $stmt->execute();
     }
 
-    //$sql = "UPDATE `photo` SET `url`='$photo' WHERE 1";
-
-    // Prepare statement
-    //$stmt = $conn->prepare($sql);
-
-    // execute the query
-    //$stmt->execute();
-
 } catch (PDOException $e) {
 }
 header('Location: edit.php');

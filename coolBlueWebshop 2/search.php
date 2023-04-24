@@ -1,11 +1,15 @@
 <?php
+
+include 'connection.php';
+$zoektermstring = $_GET['zoek'];
+
+$zoektermen = explode(' ',$zoektermstring);
+
+
 session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-include 'connection.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -128,8 +132,21 @@ include 'connection.php';
 
     try {
 
-      $stmt = $conn->prepare("SELECT * FROM webshopContent");
+        $sql = "SELECT * FROM `webshopContent` where";
+
+        $wheres = array();
+
+        foreach($zoektermen as $zoekterm){
+            $wheres[]=" name LIKE '%$zoekterm%' or inch like '%$zoekterm%' or resolution LIKE '%$zoekterm%' or sound LIKE '%$zoekterm%' or hertz LIKE '%$zoekterm%' or price LIKE '%$zoekterm%'";
+        };
+
+        $wherestring = join(' or ' , $wheres);
+        $sql.=$wherestring;
+
+      $stmt = $conn->prepare($sql);
       $stmt->execute();
+
+    //   $sql="SELECT * FROM `webshopContent` where name LIKE'%$zoekterm%'";
 
       // set the resulting array to associative
       $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);

@@ -10,6 +10,18 @@
     outline: none;
 }
 
+#stock{
+    font-weight: 700;
+    position: absolute;
+    margin-top: -140px;
+    margin-left: 40px;
+    font-size: 20px;
+}
+
+.outOfStock{
+    opacity: .5;
+}
+
 table, tr, td {
     border:1px solid black;
   }
